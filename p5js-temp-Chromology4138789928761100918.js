@@ -20,6 +20,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   //Modes 0:Fountain, 1:Swirl, 2:Angles , 3:Blocks 
   let h=hour();
+  h=6;
   if (h>=0&&h<6) {
     mode=3;
   } else  if (h>=6&&h<12) {
@@ -31,6 +32,7 @@ function setup() {
   }
   palette=[pal0, pal1, pal2, pal3, pal4];
   let d=day();
+  d=7;
   if (d>=0&&d<7) {
     currPal=palette[0];
   } else  if (d>=7&&d<14) {
