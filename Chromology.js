@@ -77,7 +77,7 @@ class Blob {
     this.size *= scaling;
     if (mode==3) {
       this.angle += angle2 ;
-      if (( window.innerWidth <= 1280 ) || ( window.innerHeight <= 800 ) ) {
+      if (( window.innerWidth <= 1024 ) || ( window.innerHeight <= 800 ) ) {
         if (flip) {
         this.velocity.x +=  0.25;
       } else {
@@ -95,7 +95,7 @@ class Blob {
     } else if (mode==2) {
       this.velocity.mult(0.9);
       this.angle += random( angle1, angle2 )*0.15;
-      if (( window.innerWidth <= 1280 ) || ( window.innerHeight <= 800 ) ) {
+      if (( window.innerWidth <= 1024 ) || ( window.innerHeight <= 800 ) ) {
         this.velocity.x += sin( this.angle ) * 0.2;
         this.velocity.y += cos( this.angle ) * 0.2;
       } else {
@@ -106,7 +106,7 @@ class Blob {
     } else if (mode==1) {
       this.velocity.mult(0.9);
       this.angle += angle2;
-      if (( window.innerWidth <= 1280 ) || ( window.innerHeight <= 800 ) ) {
+      if (( window.innerWidth <= 1024 ) || ( window.innerHeight <= 800 ) ) {
         this.velocity.x += sin( this.angle ) * 1.5;
         this.velocity.y += cos( this.angle ) * 1.5;
       } else {
@@ -118,7 +118,7 @@ class Blob {
       this.velocity.mult(resp/1866);
       this.angle += random( angle1, angle2 )*0.15;
       this.velocity.x =0;
-      if (( window.innerWidth <= 1280 ) || ( window.innerHeight <= 800 ) ) {
+      if (( window.innerWidth <= 1024 ) || ( window.innerHeight <= 800 ) ) {
         this.velocity.y += resp/700;
       } else {
         this.velocity.y += resp/3000;
