@@ -177,3 +177,13 @@ function touchMoved() {
   }
   painted();
 }
+
+function saveFile() {
+    save('Chromology.jpg');
+}
+
+function keyPressed() {
+    if (keyCode === ENTER) {
+        saveFile();
+    }
+}
