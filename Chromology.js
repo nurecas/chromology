@@ -54,7 +54,6 @@ function setup() {
 }
 
 function draw() {
-  mode=0;
   update();
   for (var i = blobs.length - 1; i >= 0; i--) {
     blobs[i].show();
