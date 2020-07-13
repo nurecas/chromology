@@ -121,7 +121,7 @@ class Blob {
       if (( window.innerWidth <= 1024 ) || ( window.innerHeight <= 767 ) ) {
         this.velocity.y += resp/700;
       } else {
-        this.velocity.y += resp/3000;
+        this.velocity.y += height/1500;
       }
       this.active = this.size >resp/336;
     }
