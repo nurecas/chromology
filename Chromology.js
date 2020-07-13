@@ -15,9 +15,17 @@ var pLocX=0, pLocY=0;
 var flip=true;
 var mode=0;
 var pLocDoOnce=true;
+var resp=0;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  if (height>=width) {
+    resp=displayHeight;
+  } else {
+    resp=displayWidth;
+  }
+  size1=resp/75;
+  size2=resp/9;
   //Modes 0:Fountain, 1:Swirl, 2:Angles , 3:Blocks 
   let h=hour();
   if (h>=0&&h<6) {
@@ -68,30 +76,53 @@ class Blob {
     this.size *= scaling;
     if (mode==3) {
       this.angle += angle2 ;
+      if (( window.innerWidth <= 1280 ) || ( window.innerHeight <= 800 ) ) {
+        if (flip) {
+        this.velocity.x +=  0.25;
+      } else {
+        this.velocity.x +=  -0.25;
+      }
+      }
+      else{
       if (flip) {
         this.velocity.x +=  0.35;
       } else {
         this.velocity.x +=  -0.35;
       }
-      this.active = this.size >60.5;
+      }
+      this.active = this.size >resp/27;
     } else if (mode==2) {
       this.velocity.mult(0.9);
       this.angle += random( angle1, angle2 )*0.15;
-      this.velocity.x += sin( this.angle ) * 0.5;
-      this.velocity.y += cos( this.angle ) * 0.5;
-      this.active = this.size >25;
+      if (( window.innerWidth <= 1280 ) || ( window.innerHeight <= 800 ) ) {
+        this.velocity.x += sin( this.angle ) * 0.2;
+        this.velocity.y += cos( this.angle ) * 0.2;
+      } else {
+        this.velocity.x += sin( this.angle ) * 0.3;
+        this.velocity.y += cos( this.angle ) * 0.3;
+      }
+      this.active = this.size >resp/67;
     } else if (mode==1) {
       this.velocity.mult(0.9);
       this.angle += angle2;
-      this.velocity.x += sin( this.angle ) * 5.5;
-      this.velocity.y += cos( this.angle ) * 5.5;
-      this.active = this.size >15;
+      if (( window.innerWidth <= 1280 ) || ( window.innerHeight <= 800 ) ) {
+        this.velocity.x += sin( this.angle ) * 1.5;
+        this.velocity.y += cos( this.angle ) * 1.5;
+      } else {
+        this.velocity.x += sin( this.angle ) * 5.5;
+        this.velocity.y += cos( this.angle ) * 5.5;
+      }
+      this.active = this.size >resp/112;
     } else {
-      this.velocity.mult(0.9);
+      this.velocity.mult(resp/1866);
       this.angle += random( angle1, angle2 )*0.15;
       this.velocity.x =0;
-      this.velocity.y += 0.5;
-      this.active = this.size >5;
+      if (( window.innerWidth <= 1280 ) || ( window.innerHeight <= 800 ) ) {
+        this.velocity.y += resp/700;
+      } else {
+        this.velocity.y += resp/3000;
+      }
+      this.active = this.size >resp/336;
     }
   }
   show() {
@@ -111,8 +142,9 @@ class Blob {
       strokeWeight(this.size);
       line(this.pos.x, this.pos.y, this.ppos.x, this.ppos.y);
     } else {
-      fill( this.color );
-      ellipse(this.pos.x, this.pos.y, this.size, this.size);
+      stroke( this.color );
+      strokeWeight(this.size);
+      line(this.pos.x, this.pos.y, this.ppos.x, this.ppos.y);
     }
     pLocX=this.pos.x;
     pLocY=this.pos.y;
@@ -177,11 +209,11 @@ function touchMoved() {
 }
 
 function saveFile() {
-    save('Chromology.jpg');
+  save('Chromology.jpg');
 }
 
 function keyPressed() {
-    if (keyCode === ENTER) {
-        saveFile();
-    }
+  if (keyCode === ENTER) {
+    saveFile();
+  }
 }
