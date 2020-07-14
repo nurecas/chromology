@@ -60,7 +60,7 @@ function draw() {
   }
 }
 
-class Blob {
+class blobclass {
   constructor(x, y, size) {
     this.active = true;
     this.size = size || 10;
@@ -78,17 +78,16 @@ class Blob {
       this.angle += angle2 ;
       if (( window.innerWidth <= 1024 ) || ( window.innerHeight <= 820 ) ) {
         if (flip) {
-        this.velocity.x +=  0.25;
+          this.velocity.x +=  0.25;
+        } else {
+          this.velocity.x +=  -0.25;
+        }
       } else {
-        this.velocity.x +=  -0.25;
-      }
-      }
-      else{
-      if (flip) {
-        this.velocity.x +=  0.35;
-      } else {
-        this.velocity.x +=  -0.35;
-      }
+        if (flip) {
+          this.velocity.x +=  0.35;
+        } else {
+          this.velocity.x +=  -0.35;
+        }
       }
       this.active = this.size >resp/27;
     } else if (mode==2) {
@@ -156,7 +155,7 @@ function startDraw(x, y) {
   if ( blobs.length >= particleCount ) {
     collection.push( particles.shift() );
   }
-  blob = new Blob(mouseX, mouseY, random(size1, size2));
+  blob = new blobclass(mouseX, mouseY, random(size1, size2));
   blob.color = random( currPal );
   angle = random( TWO_PI );
   force = random( force1, force2 );
