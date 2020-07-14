@@ -118,7 +118,7 @@ class Blob {
       this.angle += random( angle1, angle2 )*0.15;
       this.velocity.x =0;
       if (( window.innerWidth <= 1024 ) || ( window.innerHeight <= 820 ) ) {
-        this.velocity.y += resp/700;
+        this.velocity.y += resp/500;
       } else {
         this.velocity.y += resp/3000;
       }
