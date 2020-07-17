@@ -16,6 +16,7 @@ var flip=true;
 var mode=0;
 var pLocDoOnce=true;
 var resp=0;
+let asyncMasterID = '192';
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -24,39 +25,63 @@ function setup() {
   } else {
     resp=displayWidth;
   }
+  background(255);
   size1=resp/75;
   size2=resp/9;
-  //Modes 0:Fountain, 1:Swirl, 2:Angles , 3:Blocks 
-  let h=hour();
-  if (h>=0&&h<6) {
-    mode=3;
-  } else  if (h>=6&&h<12) {
-    mode=0;
-  } else  if (h>=12&&h<18) {
-    mode=1;
-  } else {
-    mode=2;
-  }
   palette=[pal0, pal1, pal2, pal3, pal4];
-  let d=day();
-  if (d>=0&&d<7) {
-    currPal=palette[0];
-  } else  if (d>=7&&d<14) {
-    currPal=palette[1];
-  } else  if (d>=14&&d<21) {
-    currPal=palette[2];
-  } else  if (d>=21&&d<28) {
-    currPal=palette[3];
-  } else {
-    currPal=palette[4];
+  currPal=palette[0];
+  mode=0;
+  loadAsyncAPI().then(res => {
+    initializeOnAPI(res);
   }
-  background(255);
+  );
 }
 
 function draw() {
+  cursor(CROSS);
   update();
   for (var i = blobs.length - 1; i >= 0; i--) {
     blobs[i].show();
+  }
+}
+
+function loadAsyncAPI() {
+  //Async API Load
+  const options = {
+  method: 
+  "post", 
+  headers: 
+  {
+  "Content-Type": 
+    "application/json"
+  }
+  , 
+  body: 
+  JSON.stringify( {
+  query: 
+    "{master(id:" + asyncMasterID + "){layers{levers{currentValue}}}}"
+  }
+  )
+};
+
+return fetch(`https://api.thegraph.com/subgraphs/name/asyncart/async-art`, options)
+.then(res => res.json());
+}
+
+function initializeOnAPI(res) {
+  //Async API initialize and store data
+  var paletteLever = res.data.master.layers[0].levers[0].currentValue;
+  var modeLever = res.data.master.layers[1].levers[0].currentValue;
+  if (paletteLever <= 4) {
+    currPal = palette[paletteLever];
+  } else {
+    currPal = palettes[0];
+  }
+
+  if (modeLever <= 3) {
+    mode = modeLever;
+  } else {
+    mode=0;
   }
 }
 
