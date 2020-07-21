@@ -67,7 +67,7 @@ function loadAsyncAPI() {
 return fetch(`https://api.thegraph.com/subgraphs/name/asyncart/async-art`, options)
 .then(res => res.json());
 }
-var moda=0;
+
 function initializeOnAPI(res) {
   //Async API initialize and store data
   var paletteLever = res.data.master.layers[0].levers[0].currentValue;
@@ -189,7 +189,6 @@ function startDraw(x, y) {
   blobs.push( blob );
 }
 function update() {
-  mode=moda;
   var i, blob;
   for ( i = blobs.length - 1; i >= 0; i-- ) {
     blob = blobs[i];
@@ -240,12 +239,5 @@ function saveFile() {
 function keyPressed() {
   if (keyCode === ENTER) {
     saveFile();
-  }else if (keyCode === RIGHT_ARROW) {
-    if (moda<3)
-    {moda++;}
-    else{
-    moda=0;
-    }
-    background(255);
   }
 }
