@@ -35,7 +35,7 @@ function setup() {
     size1 = resp / 75;
     size2 = resp / 9;
     palette = [pal0, pal1, pal2, pal3, pal4];
-    currPal = palette[0];
+    currPal = palette[2];
     mode = 0;
     loadAsyncAPI().then(res => {
         initializeOnAPI(res);
