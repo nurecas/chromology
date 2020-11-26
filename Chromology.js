@@ -62,7 +62,7 @@ function loadAsyncAPI() {
         })
     };
 
-    return fetch(`https://api.thegraph.com/subgraphs/name/asyncart/async-art`, options)
+    return fetch(`https://api.thegraph.com/subgraphs/name/avolabs-io/async_art_v2`, options)
         .then(res => res.json());
 }
 
@@ -81,6 +81,7 @@ function initializeOnAPI(res) {
     } else {
         mode = 0;
     }
+    console.log("a: " + res);
 }
 
 class blobclass {
