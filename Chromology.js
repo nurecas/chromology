@@ -58,18 +58,17 @@ function loadAsyncAPI() {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            query: "{master(id:" + asyncMasterID + "){layers{levers{currentValue}}}}"
+            query: "{token(id:" + asyncMasterID + "){tokenMaster{layers{levers{currentValue}}}}}"
         })
     };
-
     return fetch(`https://api.thegraph.com/subgraphs/name/avolabs-io/async_art_v2`, options)
         .then(res => res.json());
 }
 
 function initializeOnAPI(res) {
     //Async API initialize and store data
-    var paletteLever = res.data.master.layers[0].levers[0].currentValue;
-    var modeLever = res.data.master.layers[1].levers[0].currentValue;
+    var paletteLever = res.data.token.tokenMaster.layers[0].levers[0].currentValue;
+    var modeLever = res.data.token.tokenMaster.layers[1].levers[0].currentValue;
     if (paletteLever <= 4) {
         currPal = palette[paletteLever];
     } else {
@@ -81,7 +80,6 @@ function initializeOnAPI(res) {
     } else {
         mode = 0;
     }
-    console.log("a: " + res);
 }
 
 class blobclass {
