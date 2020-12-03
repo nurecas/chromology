@@ -61,7 +61,7 @@ function loadAsyncAPI() {
             query: "{token(id:" + asyncMasterID + "){tokenMaster{layers{levers{currentValue}}}}}"
         })
     };
-    return fetch(`https://api.thegraph.com/subgraphs/name/avolabs-io/async_art_v2`, options)
+    return fetch(`https://api.thegraph.com/subgraphs/name/asyncart/async-art-v2`, options)
         .then(res => res.json());
 }
 
